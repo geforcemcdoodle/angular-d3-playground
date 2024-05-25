@@ -1,3 +1,5 @@
+<svg>
 @for (node of nodes; track node.id) {
 	<nodeVisual [node]="node"></nodeVisual>
 }
+</svg>

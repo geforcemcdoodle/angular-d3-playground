@@ -7,7 +7,7 @@ import { Node } from '../d3/models/node';
   selector: 'app-base',
   standalone: true,
   imports: [NodeVisualComponent],
-  templateUrl: './base.component.html',
+  templateUrl: './base.component.svg',
   styleUrl: './base.component.css'
 })
 export class BaseComponent {
