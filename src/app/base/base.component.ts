@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { NodeVisualComponent } from '../d3/visuals/shared/node-visual.component';
+import { GraphComponent } from '../d3/visuals/graph/graph.component';
 import { Node } from '../d3/models/node';
 
 
 @Component({
   selector: 'app-base',
   standalone: true,
-  imports: [NodeVisualComponent],
-  templateUrl: './base.component.svg',
+  imports: [GraphComponent],
+  templateUrl: './base.component.html',
   styleUrl: './base.component.css'
 })
 export class BaseComponent {
