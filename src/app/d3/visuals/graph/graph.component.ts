@@ -29,7 +29,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     /** Receiving an initialized simulated graph from our custom d3 service */
     // this.graph = this.d3Service.getForceDirectedGraph(this.nodes, this.links, this.options);
-    this.graph = new ForceDirectedGraph(this.nodes, [], this.options);
+    this.graph = new ForceDirectedGraph(this.nodes, this.links, this.options);
     /** Binding change detection check on each tick
      * This along with an onPush change detection strategy should enforce checking only when relevant!
      * This improves scripting computation duration in a couple of tests I've made, consistently.
