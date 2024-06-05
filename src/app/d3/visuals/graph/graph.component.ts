@@ -1,18 +1,19 @@
 import { Component, Input, ChangeDetectorRef, HostListener, ChangeDetectionStrategy, OnInit, AfterViewInit } from '@angular/core';
 import { ForceDirectedGraph, Node, Link } from '../../models';
 import { NodeVisualComponent } from '../shared/node-visual.component';
+import { LinkVisualComponent } from '../shared/link-visual.component';
 
 @Component({
   selector: 'graph',
   standalone: true,
-  imports: [NodeVisualComponent],
+  imports: [NodeVisualComponent, LinkVisualComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './graph.component.html',  
   styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnInit, AfterViewInit {
   @Input('nodes') nodes!: Node[];
-  // @Input('links') links!: Link[];
+  @Input('links') links!: Link[];
 
   graph!: ForceDirectedGraph;
   private _options: { width: number, height: number } = { width: 800, height: 600 };
