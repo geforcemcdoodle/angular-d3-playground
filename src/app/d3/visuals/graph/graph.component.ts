@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectorRef, HostListener, ChangeDetectionStrategy, OnInit, AfterViewInit } from '@angular/core';
-import { ForceDirectedGraph, Node } from '../../models';
+import { ForceDirectedGraph, Node, Link } from '../../models';
 import { NodeVisualComponent } from '../shared/node-visual.component';
 
 @Component({
@@ -12,6 +12,7 @@ import { NodeVisualComponent } from '../shared/node-visual.component';
 })
 export class GraphComponent implements OnInit, AfterViewInit {
   @Input('nodes') nodes!: Node[];
+  // @Input('links') links!: Link[];
 
   graph!: ForceDirectedGraph;
   private _options: { width: number, height: number } = { width: 800, height: 600 };

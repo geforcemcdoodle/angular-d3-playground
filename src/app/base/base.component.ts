@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { GraphComponent } from '../d3/visuals/graph/graph.component';
-import { Node } from '../d3/models/node';
+import { Node, Link } from '../d3/models';
 
 
 @Component({
@@ -12,11 +12,14 @@ import { Node } from '../d3/models/node';
 })
 export class BaseComponent {
   nodes: Node[];
+  links: Link[];
   
   constructor() {
     this.nodes = [
-      {r:15, x: 100, y:100, id: 1},
-      {r:15, x: 200, y:100, id: 2}
+      new Node(1), new Node(2,200)      
+    ];
+    this.links = [
+      new Link(this.nodes[0], this.nodes[1])
     ];
   }
 }
