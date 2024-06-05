@@ -1,1 +1,8 @@
-<svg></svg>
+<svg>
+@for (node of nodes; track node.id) {
+	<svg:g nodeVisual [node]="node" />
+}
+@for (link of links; track link.source.id) {
+	<svg:g linkVisual [link]="link" />
+}
+</svg>

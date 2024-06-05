@@ -1,18 +1,25 @@
 import { Component } from '@angular/core';
-import { NodeVisualComponent } from '../d3/visuals/shared/node-visual.component';
-import { Node } from '../d3/models/node';
+import { GraphComponent } from '../d3/visuals/graph/graph.component';
+import { Node, Link } from '../d3/models';
+
 
 @Component({
   selector: 'app-base',
   standalone: true,
-  imports: [NodeVisualComponent],
+  imports: [GraphComponent],
   templateUrl: './base.component.html',
   styleUrl: './base.component.css'
 })
 export class BaseComponent {
-  node: Node;
+  nodes: Node[];
+  links: Link[];
   
   constructor() {
-    this.node = { r:15, x: 100, y:100, id: 1};
+    this.nodes = [
+      new Node(1), new Node(2,200)      
+    ];
+    this.links = [
+      new Link(this.nodes[0], this.nodes[1])
+    ];
   }
 }

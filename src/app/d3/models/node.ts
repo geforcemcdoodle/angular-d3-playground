@@ -19,7 +19,10 @@ export class Node {
 
     id?: number;
     
-    constructor(id: number) {
+    constructor(id: number, x=100, y=100, r=12) {
         this.id = id;
+        this.x = x;
+        this.y = y;
+        this.r = r;
     }
 }

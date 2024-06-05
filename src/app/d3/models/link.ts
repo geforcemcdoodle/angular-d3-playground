@@ -1,14 +1,15 @@
-import { Node } from './node';
-import * as d3 from 'd3';
+import { Node } from './';
 
-export class Link {
-    index?: number;
-    value?: number;
-    source: number;
-    target: number;
-    
-    constructor(source: number, target: number) {
-        this.source = source;
-        this.target = target;
-    }
+export class Link implements d3.SimulationLinkDatum<Node> {
+  // optional - defining optional implementation properties - required for relevant typing assistance
+  index?: number;
+
+  // must - defining enforced implementation properties
+  source: Node;
+  target: Node;
+
+  constructor(source: Node, target: Node) {
+    this.source = source;
+    this.target = target;
+  }
 }
