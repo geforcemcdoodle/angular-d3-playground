@@ -37,7 +37,7 @@ export class SunburstComponent {
     var vWidth = 300;
     var vHeight = 300;
     var vRadius = Math.min(vWidth, vHeight) / 2;
-    var vColor = d3.scaleOrdinal(d3.schemeCategory10.slice(11));
+    var vColor = d3.scaleOrdinal(d3.schemeCategory10);
 
     // Prepare our physical space
     var g = d3.select('svg')
@@ -69,13 +69,27 @@ export class SunburstComponent {
 
         // Draw on screen
         vSlices.append('path')
-            .attr('display', function (d) { return d.depth ? null : 'none'; })
-            .attr('d', <any>vArc);
-            // .attr('d', "M 10,30 A 20,20 0,0,1 50,30 A 20,20 0,0,1 90,30 Q 90,60 50,90 Q 10,60 10,30 z")
-            // .style('stroke', '#000');
-        console.log(vArc); 
-            // .style('fill', function (d) { return vColor((d.children ? d : d.parent).data.id); });
+          .attr('display', function (d) { return d.depth ? null : 'none'; })
+          .attr('d', <any>vArc)
+          .style('stroke', '#fff')
+          .style('fill', function (d) { return vColor((d.children ? d : d.parent)!.data.id); });
 
+        // Add text
+        vSlices.append('text')
+          .filter(function(d: any) { return d!.parent; })
+          .attr('transform', function(d) {
+              return 'translate(' + <any>vArc.centroid(d as any) + ') rotate(' + <any>computeTextRotation(d) + ')'; })
+          .attr('dx', '-20')
+          .attr('dy', '.5em')
+          .text(function(d) { return d!.data.name });
+    }
+
+    function computeTextRotation(d: any) {
+      var angle = (d.x0 + d.x1) / Math.PI * 90;
+
+      // Avoid upside-down labels
+      return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
+      //return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
     }
   } 
 }
