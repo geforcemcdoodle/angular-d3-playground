@@ -1,27 +1,12 @@
-# PlaygroundNode
+# Motivation
+Because I didn't find an up-to-date angular project with force graph svg and its elements defined in svg components rather then using d3s join operator, I did something like https://github.com/lsharir/angular-d3-graph-example and migrated this seven year old repo to the current date and angular version.
+<img src="/assets/1_four_nodes_force_in_x_direction.png" alt="four nodes with force in x direction" style="height: 200px; width:300px;"/>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
+# d3 playground boilerplate
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
+
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

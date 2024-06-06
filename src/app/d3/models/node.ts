@@ -1,13 +1,13 @@
 import * as d3 from 'd3';
 
 
-export class Node implements d3.SimulationNodeDatum {
+export class Node {
     // Optional - defining optional implementation properties - required for relevant typing assistance
     index?: number;
     name?: string;
     group?: number;
-    x!: number;
-    y!: number;
+    x?: number;
+    y?: number;
     vx?: number;
     vy?: number;
     fx?: number | null;
@@ -19,7 +19,7 @@ export class Node implements d3.SimulationNodeDatum {
 
     id?: number;
     
-    constructor(id: number, x=100, y=100, r=15) {
+    constructor(id: number, x=100, y=100, r=12) {
         this.id = id;
         this.x = x;
         this.y = y;
