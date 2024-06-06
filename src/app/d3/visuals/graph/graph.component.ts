@@ -16,7 +16,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   @Input('links') links!: Link[];
 
   graph!: ForceDirectedGraph;
-  private _options: { width: number, height: number } = { width: 800, height: 600 };
+  _options: { width: number, height: number } = { width: 800, height: 600 };
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -35,6 +35,9 @@ export class GraphComponent implements OnInit, AfterViewInit {
      * This improves scripting computation duration in a couple of tests I've made, consistently.
      * Also, it makes sense to avoid unnecessary checks when we are dealing only with simulations data binding.
      */
+    this.graph.ticker.subscribe((d: any) => {
+      this.ref.markForCheck();
+    });
   }
 
   ngAfterViewInit() {

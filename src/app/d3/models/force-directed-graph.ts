@@ -1,4 +1,5 @@
 import { EventEmitter } from '@angular/core';
+import { Link } from './link';
 import { Node } from './node';
 import * as d3 from 'd3';
 
@@ -9,23 +10,52 @@ const FORCES = {
 }
 
 export class ForceDirectedGraph {
-  public simulation!: d3.Simulation<any, any>;
+  public ticker: EventEmitter<d3.Simulation<Node, Link>> = new EventEmitter();
+  public simulation!: d3.Simulation<Node, Link>;
 
   public nodes: Node[] = [];
+  public links: Link[] = [];
 
-  constructor(nodes: Node[], links: any, options: { width: number, height: number }) {
+  constructor(nodes: Node[], links: Link[], options: { width: number, height: number }) {
     this.nodes = nodes;
+    this.links = links;
 
     this.initSimulation(options);
   }
 
-  
+  connectNodes(source: Node, target: Node) {
+    let link;
+
+    if (!source || !target) {
+      throw new Error('One of the nodes does not exist');
+    }
+
+    link = new Link(source, target);
+    this.simulation.stop();
+    this.links.push(link);
+    this.simulation.alphaTarget(0.3).restart();
+
+    this.initLinks();
+  }
+
   initNodes() {
     if (!this.simulation) {
       throw new Error('simulation was not initialized yet');
     }
 
     this.simulation.nodes(this.nodes);
+  }
+
+  initLinks() {
+    if (!this.simulation) {
+      throw new Error('simulation was not initialized yet');
+    }
+
+    this.simulation.force('links',
+      d3.forceLink(this.links)
+        .id((d: any) => d['id'])
+        .strength(FORCES.LINKS)
+    );
   }
 
   initSimulation(options: any) {
@@ -35,6 +65,8 @@ export class ForceDirectedGraph {
 
     /** Creating the simulation */
     if (!this.simulation) {
+      const ticker = this.ticker;
+
       this.simulation = d3.forceSimulation()
         .force('charge',
           d3.forceManyBody()
@@ -46,7 +78,13 @@ export class ForceDirectedGraph {
             .radius((d: any) => d['r'] + 5).iterations(2)
         );
 
+      // Connecting the d3 ticker to an angular event emitter
+      this.simulation.on('tick', function () {
+        ticker.emit(this);
+      });
+
       this.initNodes();
+      this.initLinks();
     }
 
     /** Updating the central force of the simulation */

@@ -16,10 +16,11 @@ export class BaseComponent {
   
   constructor() {
     this.nodes = [
-      new Node(1), new Node(2,200)      
+      new Node(1), new Node(2,150), new Node(3,200), new Node(4,250)
     ];
     this.links = [
-      new Link(this.nodes[0], this.nodes[1])
+      new Link(this.nodes[0], this.nodes[1]),
+      new Link(this.nodes[2], this.nodes[3])
     ];
   }
 }

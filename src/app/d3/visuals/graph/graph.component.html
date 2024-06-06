@@ -1,4 +1,4 @@
-<svg>
+<svg #svg [attr.width]="_options.width" [attr.height]="_options.height">
 @for (node of nodes; track node.id) {
 	<svg:g nodeVisual [node]="node" />
 }
