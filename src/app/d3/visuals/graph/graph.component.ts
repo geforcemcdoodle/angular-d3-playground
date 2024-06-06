@@ -2,11 +2,13 @@ import { Component, Input, ChangeDetectorRef, HostListener, ChangeDetectionStrat
 import { ForceDirectedGraph, Node, Link } from '../../models';
 import { NodeVisualComponent } from '../shared/node-visual.component';
 import { LinkVisualComponent } from '../shared/link-visual.component';
+import { D3Service } from '../../d3.service';
+import { ZoomableDirective } from '../../directives';
 
 @Component({
   selector: 'graph',
   standalone: true,
-  imports: [NodeVisualComponent, LinkVisualComponent],
+  imports: [NodeVisualComponent, LinkVisualComponent, ZoomableDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './graph.component.html',  
   styleUrls: ['./graph.component.css']
@@ -24,12 +26,12 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor(private ref: ChangeDetectorRef, private d3Service: D3Service) {}
 
   ngOnInit() {
     /** Receiving an initialized simulated graph from our custom d3 service */
     // this.graph = this.d3Service.getForceDirectedGraph(this.nodes, this.links, this.options);
-    this.graph = new ForceDirectedGraph(this.nodes, this.links, this.options);
+    this.graph = this.d3Service.getForceDirectedGraph(this.nodes, this.links, this.options);
     /** Binding change detection check on each tick
      * This along with an onPush change detection strategy should enforce checking only when relevant!
      * This improves scripting computation duration in a couple of tests I've made, consistently.
