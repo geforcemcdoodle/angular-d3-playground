@@ -6,7 +6,6 @@ import { D3Service } from '../d3.service';
     standalone: true
 })
 export class ZoomableDirective implements OnInit {
-    // @Input('zoomableOf') zoomableOf!: ElementRef;
     @Input('zoomableOf') zoomableOf!: HTMLElement;
 
     constructor(private d3Service: D3Service, private _element: ElementRef) {}

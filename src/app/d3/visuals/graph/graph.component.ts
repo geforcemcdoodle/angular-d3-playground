@@ -3,12 +3,12 @@ import { ForceDirectedGraph, Node, Link } from '../../models';
 import { NodeVisualComponent } from '../shared/node-visual.component';
 import { LinkVisualComponent } from '../shared/link-visual.component';
 import { D3Service } from '../../d3.service';
-import { ZoomableDirective } from '../../directives';
+import { ZoomableDirective, DraggableDirective } from '../../directives';
 
 @Component({
   selector: 'graph',
   standalone: true,
-  imports: [NodeVisualComponent, LinkVisualComponent, ZoomableDirective],
+  imports: [NodeVisualComponent, LinkVisualComponent, ZoomableDirective, DraggableDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './graph.component.html',  
   styleUrls: ['./graph.component.css']
