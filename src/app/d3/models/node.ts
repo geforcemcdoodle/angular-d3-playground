@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 
 
-export class Node {
+export class Node implements d3.SimulationNodeDatum {
     // Optional - defining optional implementation properties - required for relevant typing assistance
     index?: number;
     name?: string;

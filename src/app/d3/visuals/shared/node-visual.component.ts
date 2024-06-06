@@ -8,4 +8,8 @@ import { Node } from '../../models';
 })
 export class NodeVisualComponent {
   @Input('node') node!: Node;
+
+  onClick() {
+    console.log("sdd");
+  }
 }

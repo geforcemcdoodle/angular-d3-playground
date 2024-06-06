@@ -1,4 +1,6 @@
-  <svg:circle
+<svg:circle
   [attr.cx]="node.x"
   [attr.cy]="node.y"
-  [attr.r]="node.r"/>
+  [attr.r]="node.r"
+  (click)="onClick()"
+/>

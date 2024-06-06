@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { GraphComponent } from '../d3/visuals/graph/graph.component';
+import { SunburstComponent } from '../d3/visuals/sunburst/sunburst.component';
 import { Node, Link } from '../d3/models';
 
 
 @Component({
   selector: 'app-base',
   standalone: true,
-  imports: [GraphComponent],
+  imports: [GraphComponent, SunburstComponent],
   templateUrl: './base.component.html',
   styleUrl: './base.component.css'
 })
