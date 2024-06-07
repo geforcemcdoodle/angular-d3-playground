@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Node } from '../../models';
+import { NodesActions } from '../../../store/nodes.actions';
 
 @Component({
   selector: '[nodeVisual]',
@@ -9,7 +11,11 @@ import { Node } from '../../models';
 export class NodeVisualComponent {
   @Input('node') node!: Node;
 
+  constructor(
+    private store: Store
+  ) {  }
+
   onClick() {
-    console.log("sdd");
+    this.store.dispatch(NodesActions.addNode({ node: "test" }));
   }
 }
