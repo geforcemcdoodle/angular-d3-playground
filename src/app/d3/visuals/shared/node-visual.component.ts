@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Node } from '../../models';
-import { NodesActions } from '../../../store/nodes.actions';
+import { NodesActions, ShowSunburst } from '../../../store/nodes.actions';
 
 @Component({
   selector: '[nodeVisual]',
@@ -16,6 +16,6 @@ export class NodeVisualComponent {
   ) {  }
 
   onClick() {
-    this.store.dispatch(NodesActions.addNode({ node: "test" }));
+    this.store.dispatch(ShowSunburst());
   }
 }

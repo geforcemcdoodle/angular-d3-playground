@@ -1,2 +1,2 @@
-<app-sunburst></app-sunburst>
+<app-sunburst *ngIf="show$ | async"></app-sunburst>
 <graph [nodes]="nodes" [links]="links"></graph>

@@ -3,14 +3,15 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
-import { nodesReducer } from './store/nodes.reducer';
+import { nodesReducer, nodesMenuReducer } from './store/nodes.reducer';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideStore({
-      nodes: nodesReducer
+      nodes: nodesReducer,
+      show_sunburst: nodesMenuReducer,
     })
   ]
 };

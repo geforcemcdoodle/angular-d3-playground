@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import * as d3 from 'd3';
 
 @Component({
@@ -16,7 +18,8 @@ export class SunburstComponent {
   radius = Math.min(this.width, this.height) / 2;
   color = d3.scaleOrdinal(d3.schemeCategory10); 
 
-  constructor() {
+  constructor(
+    ) {
     this.nodeData = {
       "name": "TOPICS", "children": [{
           "name": "Topic A",
