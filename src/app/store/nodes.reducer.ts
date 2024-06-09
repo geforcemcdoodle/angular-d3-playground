@@ -2,9 +2,10 @@ import { createReducer, on } from '@ngrx/store';
 import { 
   NodesActions, ShowSunburst
 } from './nodes.actions';
+import { ShowAtPoint } from '../interfaces/showAtPoint';
 
 export const initialState: string = '';
-export const initialSunburstState: boolean = false;
+export const initialSunburstState: ShowAtPoint = { show: false, x: 0, y: 0 };
 
 export const nodesReducer = createReducer(
   initialState,  
@@ -16,5 +17,7 @@ export const nodesReducer = createReducer(
 
 export const nodesMenuReducer = createReducer(
   initialSunburstState,
-  on(ShowSunburst, state => true),
+  on(ShowSunburst, (state, {showAtPoint}) => {
+    return showAtPoint;
+  }),
 );

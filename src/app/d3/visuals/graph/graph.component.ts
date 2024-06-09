@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectorRef, HostListener, ChangeDetectionStrategy, OnInit, AfterViewInit } from '@angular/core';
 import { ForceDirectedGraph, Node, Link } from '../../models';
-import { NodeVisualComponent } from '../shared/node-visual.component';
-import { LinkVisualComponent } from '../shared/link-visual.component';
+import { NodeVisualComponent } from '../shared/node-visual/node-visual.component';
+import { LinkVisualComponent } from '../shared/link-visual/link-visual.component';
 import { D3Service } from '../../d3.service';
 import { ZoomableDirective, DraggableDirective } from '../../directives';
 

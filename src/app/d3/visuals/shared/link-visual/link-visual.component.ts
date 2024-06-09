@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Link } from '../../models';
+import { Link } from '../../../models';
 
 @Component({
   selector: '[linkVisual]',

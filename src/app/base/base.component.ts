@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ShowAtPoint } from '../interfaces/showAtPoint';
 
 
 
@@ -17,12 +18,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './base.component.css'
 })
 export class BaseComponent {
-  show$!: Observable<boolean>;
+  showAtPoint$!: Observable<ShowAtPoint>;
   nodes: Node[];
   links: Link[];
   
   constructor(
-    private store: Store<{show_sunburst: boolean}>,
+    private store: Store<{show_sunburst: ShowAtPoint}>,
     ) {
     this.nodes = [
       new Node(1), new Node(2,150), new Node(3,200), new Node(4,450),
@@ -35,6 +36,6 @@ export class BaseComponent {
   }
 
   ngOnInit() {
-    this.show$ = this.store.select('show_sunburst');
+    this.showAtPoint$ = this.store.select('show_sunburst');
   }
 }
