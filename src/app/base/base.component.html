@@ -1,2 +1,5 @@
-<app-sunburst *ngIf="(showAtPoint$ | async)!.show"></app-sunburst>
+<app-sunburst
+	*ngIf="(showSunburstAtPoint$ | async)!.show"
+	[ngStyle]="currentStyles"
+/>
 <graph [nodes]="nodes" [links]="links"></graph>

@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { GraphComponent } from '../d3/visuals/graph/graph.component';
 import { SunburstComponent } from '../d3/visuals/sunburst/sunburst.component';
 import { Node, Link } from '../d3/models';
-import { NgIf } from '@angular/common';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgStyle } from '@angular/common';
 import { ShowAtPoint } from '../interfaces/showAtPoint';
 
 
@@ -13,14 +12,15 @@ import { ShowAtPoint } from '../interfaces/showAtPoint';
 @Component({
   selector: 'app-base',
   standalone: true,
-  imports: [GraphComponent, SunburstComponent, NgIf, CommonModule],
+  imports: [GraphComponent, SunburstComponent, NgIf, NgStyle, CommonModule],
   templateUrl: './base.component.html',
   styleUrl: './base.component.css'
 })
 export class BaseComponent {
-  showAtPoint$!: Observable<ShowAtPoint>;
+  showSunburstAtPoint$!: Observable<ShowAtPoint>;
   nodes: Node[];
   links: Link[];
+  currentStyles: Record<string, string> = {};
   
   constructor(
     private store: Store<{show_sunburst: ShowAtPoint}>,
@@ -36,6 +36,20 @@ export class BaseComponent {
   }
 
   ngOnInit() {
-    this.showAtPoint$ = this.store.select('show_sunburst');
+    let _this = this;
+    this.showSunburstAtPoint$ = this.store.select('show_sunburst');
+    this.showSunburstAtPoint$.subscribe({
+      next (z) {
+        _this.setCurrentStyles(z.x, z.y);
+      }
+    });
+  }
+
+  setCurrentStyles(x: number, y: number) {
+    this.currentStyles = {
+      'position': 'absolute',
+      'left': `${x-150+6}px`,
+      'top': `${y-150+6}px`,
+    };
   }
 }

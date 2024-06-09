@@ -17,9 +17,7 @@ export class NodeVisualComponent {
     private elementRef: ElementRef
   ) {  }
 
-  onClick() {
-    this.store.dispatch(ShowSunburst( { showAtPoint: {show: true, x: 600, y: 600} } ));
-    // console.log(this.elementRef.nativeElement);
-    // console.log(this.node.x);
+  onClick() {    
+    this.store.dispatch(ShowSunburst( { showAtPoint: {show: true, x: this.node.x as any, y: this.node.y as any} } ));
   }
 }
