@@ -1,10 +1,7 @@
 # Motivation
 Because I didn't find an up-to-date angular project with force graph svg and its elements defined in svg components rather then using d3s join operator, I did something like https://github.com/lsharir/angular-d3-graph-example and migrated this seven year old repo to the current date and angular version.
 <br/>
-<video width="400" autoplay>
-  <source src="/assets/sunburst_on_click.mp4" type="video/mp4">  
-  Your browser does not support HTML video.
-</video>
+<img src="/assets/sunburst_on_click.gif" width="400"/>
 
 
 # d3 playground boilerplate
