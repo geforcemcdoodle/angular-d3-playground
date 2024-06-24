@@ -13,3 +13,8 @@ export const ShowSunburst = createAction(
   'ShowSunburst',
   props<{showAtPoint: ShowAtPoint}>()
 );
+
+export const CloseSunburst = createAction(
+  'CloseSunburst',
+  props<{close: boolean}>()
+);

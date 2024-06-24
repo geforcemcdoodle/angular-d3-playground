@@ -36,28 +36,26 @@ export class D3Service {
         const d3element = d3.select(element);
 
         // Reheat the simulation when drag starts, and fix the subject position.
-      function dragstarted(event: any) {
-        if (!event.active) graph.simulation.alphaTarget(0.3).restart();
-        node.fx = event.subject.x;
-        node.fy = event.subject.y;
-        console.log(event);
-      }
+        function dragstarted(event: any) {
+          if (!event.active) graph.simulation.alphaTarget(0.3).restart();
+          node.fx = event.subject.x;
+          node.fy = event.subject.y;
+        }
 
-      // Update the subject (dragged node) position during drag.
-      function dragged(event: any) {
-        node.fx = event.x;
-        node.fy = event.y;
-      }
+        // Update the subject (dragged node) position during drag.
+        function dragged(event: any) {
+          node.fx = event.x;
+          node.fy = event.y;
+        }
 
-      // Restore the target alpha so the simulation cools after dragging ends.
-      // Unfix the subject position now that it’s no longer being dragged.
-      function dragended(event: any) {
-        if (!event.active) graph.simulation.alphaTarget(0);
-        node.fx = null;
-        node.fy = null;
+        // Restore the target alpha so the simulation cools after dragging ends.
+        // Unfix the subject position now that it’s no longer being dragged.
+        function dragended(event: any) {
+          if (!event.active) graph.simulation.alphaTarget(0);
+          node.fx = null;
+          node.fy = null;
 
-      }
-
+        }
 
         d3element.call(d3.drag()
             .on("start", dragstarted)

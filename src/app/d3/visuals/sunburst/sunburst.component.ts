@@ -73,10 +73,23 @@ export class SunburstComponent {
      */
     function drawSunburst(data: any) {
         // Layout + Data
-        var vRoot = d3.hierarchy(data).sum(function (d) { return d.size});
-        var vNodes = vRoot.descendants();
+        let vRoot = d3.hierarchy(data).sum(function (d) { return d.size});
+        let vNodes = vRoot.descendants();
         vLayout(vRoot);
-        var vSlices = g.selectAll('g').data(vNodes).enter().append('g');
+        let vSlices = g.selectAll('g').data(vNodes).enter().append('g');
+        vSlices.style("cursor", "pointer")
+          .on("click", clicked);
+
+        function clicked(event: any, p: any) {
+          switch (p.data.name) {
+          case "":
+            console.log("CLOSE");
+            break;
+          }
+          console.log(p.data.name);
+
+        }
+
 
         // Draw on screen
         vSlices.append('path')
@@ -96,7 +109,7 @@ export class SunburstComponent {
     }
 
     function computeTextRotation(d: any) {
-      var angle = (d.x0 + d.x1) / Math.PI * 90;
+      let angle = (d.x0 + d.x1) / Math.PI * 90;
 
       // Avoid upside-down labels
       return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims

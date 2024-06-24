@@ -5,14 +5,22 @@ import { Node, Link } from '../d3/models';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CommonModule, NgIf, NgStyle } from '@angular/common';
+
 import { ShowAtPoint } from '../interfaces/showAtPoint';
 
+import { Indicator, IndicatorAnimations } from './indicator';
 
 
 @Component({
   selector: 'app-base',
   standalone: true,
-  imports: [GraphComponent, SunburstComponent, NgIf, NgStyle, CommonModule],
+  imports: [ 
+    GraphComponent,
+    SunburstComponent,
+    NgIf,
+    NgStyle,
+    CommonModule,
+    ],
   templateUrl: './base.component.html',
   styleUrl: './base.component.css'
 })
@@ -21,7 +29,10 @@ export class BaseComponent {
   nodes: Node[];
   links: Link[];
   currentStyles: Record<string, string> = {};
-  
+  eventText = '';
+  indicators!: any;
+
+
   constructor(
     private store: Store<{show_sunburst: ShowAtPoint}>,
     ) {
@@ -33,6 +44,7 @@ export class BaseComponent {
       new Link(this.nodes[0], this.nodes[1]),
       new Link(this.nodes[2], this.nodes[3])
     ];
+    this.indicators = new Indicator();
   }
 
   ngOnInit() {
@@ -51,5 +63,16 @@ export class BaseComponent {
       'left': `${x-150+6}px`,
       'top': `${y-150+6}px`,
     };
+  }
+
+  onPan(evt: any)
+  {
+    this.eventText += `(${evt.center.x}, ${evt.center.y})<br/>`;
+      const indicator = this.indicators.display(
+      evt.center.x,
+      evt.center.y,
+      50
+    );
+    this.indicators.hide(indicator);
   }
 }
