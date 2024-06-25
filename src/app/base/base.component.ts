@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { GraphComponent } from '../d3/visuals/graph/graph.component';
 import { SunburstComponent } from '../d3/visuals/sunburst/sunburst.component';
 import { Node, Link } from '../d3/models';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CommonModule, NgIf, NgStyle } from '@angular/common';
-
 import { ShowAtPoint } from '../interfaces/showAtPoint';
-
 import { Indicator, IndicatorAnimations } from './indicator';
 
+import 'hammerjs';
 
 @Component({
   selector: 'app-base',
@@ -32,6 +31,7 @@ export class BaseComponent {
   eventText = '';
   indicators!: any;
 
+  @ViewChild('test') test!: ElementRef;
 
   constructor(
     private store: Store<{show_sunburst: ShowAtPoint}>,
