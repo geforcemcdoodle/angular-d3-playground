@@ -18,14 +18,13 @@ export class Indicator {
           if (gestureIndicator) {
             for (let i = 0; i < self.gestureIndicators.length; i++) {
               const indicator = self.gestureIndicators[i];
-
-                if (                
-                  indicator["x"] === gestureIndicator.x &&
-                  indicator["y"] === gestureIndicator.y
-                ) {
-                  self.gestureIndicators.splice(i, 1);
-                  break;
-                }
+              if (
+                indicator["x"] === gestureIndicator.x &&
+                indicator["y"] === gestureIndicator.y
+              ) {
+                self.gestureIndicators.splice(i, 1);
+                break;
+              }
             }
           }
         }, 250);
@@ -42,9 +41,7 @@ export class Indicator {
         state: 'hidden',
       };
 
-      /*this.gestureIndicators.push(gestureIndicator);*/
       this.gestureIndicators = [...this.gestureIndicators, gestureIndicator] as any;
-
       const self = this;
       setTimeout(() => {
         gestureIndicator.state = 'visible';

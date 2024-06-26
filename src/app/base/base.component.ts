@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CommonModule, NgIf, NgStyle } from '@angular/common';
 import { ShowAtPoint } from '../interfaces/showAtPoint';
-import { Indicator, IndicatorAnimations } from './indicator';
+import { Indicator, IndicatorAnimations } from '../gestures/pan.indicator';
 
 import 'hammerjs';
 
@@ -21,14 +21,13 @@ import 'hammerjs';
     CommonModule,
     ],
   templateUrl: './base.component.html',
-  styleUrl: './base.component.css'
+  styleUrls: ['./base.component.css', '../gestures/gestures.css']
 })
 export class BaseComponent {
   showSunburstAtPoint$!: Observable<ShowAtPoint>;
   nodes: Node[];
   links: Link[];
   currentStyles: Record<string, string> = {};
-  eventText = '';
   indicators!: any;
 
   @ViewChild('test') test!: ElementRef;
@@ -67,11 +66,10 @@ export class BaseComponent {
 
   onPan(evt: any)
   {
-    this.eventText += `(${evt.center.x}, ${evt.center.y})<br/>`;
-      const indicator = this.indicators.display(
+    const indicator = this.indicators.display(
       evt.center.x,
       evt.center.y,
-      50
+      5
     );
     this.indicators.hide(indicator);
   }
