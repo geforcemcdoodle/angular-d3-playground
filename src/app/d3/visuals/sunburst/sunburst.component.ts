@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as d3 from 'd3';
+import { ShowSunburst } from '../../../store/nodes.actions';
+
 
 @Component({
   selector: 'app-sunburst',
@@ -19,6 +21,7 @@ export class SunburstComponent {
   color = d3.scaleOrdinal(d3.schemeCategory10); 
 
   constructor(
+    private store: Store,
     ) {
     this.nodeData = {
       "name": "TOPICS", "children": [
@@ -64,14 +67,14 @@ export class SunburstComponent {
         .innerRadius(function (d: any) { return d.y0; })
         .outerRadius(function (d: any) { return d.y1; });
     
-    drawSunburst(this.nodeData);
+    drawSunburst(this.store, this.nodeData);
 
 
     /**
      * Draw our sunburst
      * @param {object} data - Hierarchical data
      */
-    function drawSunburst(data: any) {
+    function drawSunburst(store: any, data: any) {
         // Layout + Data
         let vRoot = d3.hierarchy(data).sum(function (d) { return d.size});
         let vNodes = vRoot.descendants();
@@ -83,11 +86,17 @@ export class SunburstComponent {
         function clicked(event: any, p: any) {
           switch (p.data.name) {
           case "":
-            console.log("CLOSE");
+            store.dispatch(
+              ShowSunburst({
+                showAtPoint: {
+                  show: false,
+                  x: 0,
+                  y: 0 
+                }
+              }
+            ));
             break;
           }
-          console.log(p.data.name);
-
         }
 
 

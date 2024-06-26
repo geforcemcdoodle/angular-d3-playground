@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Node } from '../../../models';
-import { NodesActions, ShowSunburst } from '../../../../store/nodes.actions';
+import { ShowSunburst } from '../../../../store/nodes.actions';
 import { Indicator, IndicatorAnimations } from '../../../../gestures/press.indicator';
 
 
