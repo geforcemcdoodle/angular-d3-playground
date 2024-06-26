@@ -42,6 +42,7 @@ export class Indicator {
       };
 
       this.gestureIndicators = [...this.gestureIndicators, gestureIndicator] as any;
+      
       const self = this;
       setTimeout(() => {
         gestureIndicator.state = 'visible';

@@ -4,6 +4,7 @@ import { Node } from '../../../models';
 import { NodesActions, ShowSunburst } from '../../../../store/nodes.actions';
 import { Indicator, IndicatorAnimations } from '../../../../gestures/press.indicator';
 
+
 @Component({
   selector: '[nodeVisual]',
   standalone: true,
@@ -22,12 +23,8 @@ export class NodeVisualComponent {
     this.indicators = new Indicator();
   }
 
-  onClick() {    
-    this.store.dispatch(ShowSunburst( { showAtPoint: {show: true, x: this.node.x as any, y: this.node.y as any} } ));
-  }
-
   onPress(evt: any) {
-    console.log("onPress");
+    let _this = this;
     const gestureIndicator = this.indicators.display(
       evt.center.x,
       evt.center.y,
@@ -37,8 +34,18 @@ export class NodeVisualComponent {
     let time = 0;
     gestureIndicator.interval = setInterval(() => {
       gestureIndicator.size += 1;
-      }, 10);
-    /*this.eventText += `(${evt.center.x}, ${evt.center.y})<br/>`;*/
+      if (gestureIndicator.size === 100) {
+        this.store.dispatch(
+          ShowSunburst({
+            showAtPoint: {
+              show: true,
+              x: _this.node.x as any,
+              y: _this.node.y as any
+            }
+          }
+        ));
+      }
+    }, 10);
   }
 
   onPressUp(evt: any) {

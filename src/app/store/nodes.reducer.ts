@@ -10,7 +10,6 @@ export const initialSunburstState: ShowAtPoint = { show: false, x: 0, y: 0 };
 export const nodesReducer = createReducer(
   initialState,  
   on(NodesActions.addNode, (state, { node }) => {
-    console.log(node); 
     return node;
   }),
 );

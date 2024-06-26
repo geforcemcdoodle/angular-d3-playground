@@ -1,7 +1,3 @@
-<div #test class="gesture__zone" (pan)="onPan($event)">
-  <h1>Pan Gesture</h1>
-</div>
-
 @for (indicator of indicators.gestureIndicators; track indicator) {
 	<div
 	  class="gesture__indicator"	  
@@ -18,4 +14,10 @@
 	*ngIf="(showSunburstAtPoint$ | async)!.show"
 	[ngStyle]="currentStyles"
 />
-<graph [nodes]="nodes" [links]="links"></graph>
+<graph
+	#test
+	class="gesture__zone"
+	(pan)="onPan($event)"
+	[nodes]="nodes"
+	[links]="links"
+/>

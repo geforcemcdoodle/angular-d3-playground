@@ -1,4 +1,8 @@
-<svg #svg [attr.width]="_options.width" [attr.height]="_options.height">
+<svg
+	#svg
+	[attr.width]="_options.width"
+	[attr.height]="_options.height"
+>
 	<svg:g [zoomableOf]="svg">
 		@for (node of nodes; track node.id) {
 			<svg:g nodeVisual [draggableNode]="node" [draggableInGraph]="graph" [node]="node" />

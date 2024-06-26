@@ -2,8 +2,7 @@
   class="circle gesture__zone"
   [attr.cx]="node.x"
   [attr.cy]="node.y"
-  [attr.r]="node.r"
-  
+  [attr.r]="node.r"  
   (press)="onPress($event)"
   (pressUp)="onPressUp($event)"
   stroke="black"

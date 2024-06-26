@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 import { CommonModule, NgIf, NgStyle } from '@angular/common';
 import { ShowAtPoint } from '../interfaces/showAtPoint';
 import { Indicator, IndicatorAnimations } from '../gestures/pan.indicator';
-
 import 'hammerjs';
+
 
 @Component({
   selector: 'app-base',
@@ -64,9 +64,8 @@ export class BaseComponent {
     };
   }
 
-  onPan(evt: any)
-  {
-    const indicator = this.indicators.display(
+  onPan(evt: any) {
+      const indicator = this.indicators.display(
       evt.center.x,
       evt.center.y,
       5
