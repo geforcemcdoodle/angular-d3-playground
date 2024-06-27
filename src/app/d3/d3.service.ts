@@ -13,7 +13,9 @@ export class D3Service {
     */
    graph!: ForceDirectedGraph;
 
-    constructor() {}
+    constructor() {
+
+    }
 
     applyZoomableBehaviour(svgElement: any, containerElement: any) {
         let svg, container, zoomed, zoom;
@@ -69,5 +71,9 @@ export class D3Service {
     getForceDirectedGraph(nodes: Node[], links: Link[], options: { width: number, height: number} ) {
         this.graph = new ForceDirectedGraph(nodes, links, options);
         return this.graph;
+    }
+
+    addNode() {
+        this.graph.addNode();
     }
 }

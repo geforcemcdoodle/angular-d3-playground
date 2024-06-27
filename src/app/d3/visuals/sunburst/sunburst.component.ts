@@ -2,7 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as d3 from 'd3';
-import { ShowSunburst } from '../../../store/nodes.actions';
+import { ShowSunburst, NodesActions } from '../../../store/nodes.actions';
+import { Node } from '../../models/node';
+import { D3Service } from '../../d3.service';
 
 
 @Component({
@@ -22,6 +24,7 @@ export class SunburstComponent {
 
   constructor(
     private store: Store,
+    private d3Service: D3Service
     ) {
     this.nodeData = {
       "name": "TOPICS", "children": [
@@ -67,14 +70,14 @@ export class SunburstComponent {
         .innerRadius(function (d: any) { return d.y0; })
         .outerRadius(function (d: any) { return d.y1; });
     
-    drawSunburst(this.store, this.nodeData);
+    drawSunburst(this.store, this.d3Service, this.nodeData);
 
 
     /**
      * Draw our sunburst
      * @param {object} data - Hierarchical data
      */
-    function drawSunburst(store: any, data: any) {
+    function drawSunburst(store: any, d3Service: any, data: any) {
         // Layout + Data
         let vRoot = d3.hierarchy(data).sum(function (d) { return d.size});
         let vNodes = vRoot.descendants();
@@ -96,9 +99,11 @@ export class SunburstComponent {
               }
             ));
             break;
+          case "add":
+            d3Service.addNode();
+            break;
           }
         }
-
 
         // Draw on screen
         vSlices.append('path')

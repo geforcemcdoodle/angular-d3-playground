@@ -1,3 +1,6 @@
 .circle:hover {
     stroke-width: 10;
- }
+}
+.circle:active {
+    stroke-width: 10;
+}

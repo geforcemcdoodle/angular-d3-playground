@@ -93,4 +93,10 @@ export class ForceDirectedGraph {
     /** Restarting the simulation internal timer */
     this.simulation.restart();
   }
+  addNode() {
+    this.nodes.push(new Node(9));
+    this.simulation.nodes(this.nodes);
+    this.simulation.alpha(1.0).restart();
+    console.log("tried to add Node");
+  } 
 }
