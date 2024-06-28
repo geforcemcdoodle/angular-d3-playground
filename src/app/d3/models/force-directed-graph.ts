@@ -93,10 +93,20 @@ export class ForceDirectedGraph {
     /** Restarting the simulation internal timer */
     this.simulation.restart();
   }
+
   addNode() {
     this.nodes.push(new Node(9));
     this.simulation.nodes(this.nodes);
     this.simulation.alpha(1.0).restart();
-    console.log("tried to add Node");
-  } 
+  }
+
+  addLink() {
+    this.links.push(new Link(this.nodes[1], this.nodes[2]));
+    this.simulation.force('links',
+      d3.forceLink(this.links)
+        .id((d: any) => d['id'])
+        .strength(FORCES.LINKS)
+    );
+    this.simulation.alpha(1.0).restart();
+  }
 }

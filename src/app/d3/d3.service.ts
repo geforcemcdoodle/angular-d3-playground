@@ -73,7 +73,8 @@ export class D3Service {
         return this.graph;
     }
 
-    addNode() {
+    addConnectedNode() {
         this.graph.addNode();
+        this.graph.addLink();
     }
 }

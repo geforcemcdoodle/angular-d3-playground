@@ -100,7 +100,7 @@ export class SunburstComponent {
             ));
             break;
           case "add":
-            d3Service.addNode();
+            d3Service.addConnectedNode();
             break;
           }
         }
