@@ -7,6 +7,7 @@ export const NodesActions = createActionGroup({
   source: 'Nodes',
   events: {
     'Add Node': props<{ node: Node }>(),
+    'Select Node': props<{ node: Node }>(),    
   },
 });
 

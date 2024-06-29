@@ -3,6 +3,9 @@ import { ForceDirectedGraph } from './models/force-directed-graph';
 import { Link } from './models/link';
 import { Node } from './models/node';
 import * as d3 from 'd3';
+import { Store } from '@ngrx/store';
+import { selectFocusedNode } from '../store/nodes.selectors';
+
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +14,12 @@ export class D3Service {
     /** This service will provide methods to enable user interaction with elements
     * while maintaining the d3 simulations physics
     */
-   graph!: ForceDirectedGraph;
+    graph!: ForceDirectedGraph;
+    node_focused$ = this.store.select(selectFocusedNode);
 
-    constructor() {
-
+    constructor(
+        private store: Store<{ node_focused: Node }>,
+        ) {
     }
 
     applyZoomableBehaviour(svgElement: any, containerElement: any) {
@@ -74,7 +79,14 @@ export class D3Service {
     }
 
     addConnectedNode() {
-        this.graph.addNode();
-        this.graph.addLink();
+        let _this = this;
+        let node_source;
+        let node_target = this.graph.addNode();
+        this.node_focused$.subscribe({
+            next: (node) => { 
+                // console.log(node);
+                _this.graph.addLink(node, node_target);
+            }
+        });
     }
 }

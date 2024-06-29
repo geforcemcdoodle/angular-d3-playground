@@ -16,7 +16,12 @@ export class ForceDirectedGraph {
   public nodes: Node[] = [];
   public links: Link[] = [];
 
-  constructor(nodes: Node[], links: Link[], options: { width: number, height: number }) {
+
+  constructor(
+    nodes: Node[],
+    links: Link[],
+    options: { width: number, height: number },
+  ) {
     this.nodes = nodes;
     this.links = links;
 
@@ -95,13 +100,19 @@ export class ForceDirectedGraph {
   }
 
   addNode() {
-    this.nodes.push(new Node(9));
+    let id = this.nodes.length + 1;
+    let node_new = new Node(id);
+    this.nodes.push(node_new);
     this.simulation.nodes(this.nodes);
     this.simulation.alpha(1.0).restart();
+
+    return node_new;
   }
 
-  addLink() {
-    this.links.push(new Link(this.nodes[1], this.nodes[2]));
+  addLink(source: Node, target: Node) {
+    // this.links.push(new Link(source, target));
+    // this.links.push(new Link(this.nodes[0], this.nodes[3]));
+    this.links.push(new Link(this.nodes[0], target));
     this.simulation.force('links',
       d3.forceLink(this.links)
         .id((d: any) => d['id'])

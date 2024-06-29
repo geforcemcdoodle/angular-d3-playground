@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Node } from '../../../models';
-import { ShowSunburst } from '../../../../store/nodes.actions';
+import { ShowSunburst, NodesActions } from '../../../../store/nodes.actions';
 import { Indicator, IndicatorAnimations } from '../../../../gestures/press.indicator';
 
 
@@ -54,5 +54,13 @@ export class NodeVisualComponent {
       clearInterval(indicator.interval);
       this.indicators.hide(indicator);
     }
+  }
+
+  onClick() {
+    // without this shallow copy ( doing { node: this.node}), we run into a 'fx is read-only' error loop
+    let node = {...this.node};
+    this.store.dispatch(
+      NodesActions.selectNode({ node: node })
+    );
   }
 }

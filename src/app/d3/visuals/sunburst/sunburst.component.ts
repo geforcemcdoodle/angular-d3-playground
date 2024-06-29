@@ -127,7 +127,6 @@ export class SunburstComponent {
 
       // Avoid upside-down labels
       return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
-      //return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
     }
   } 
 }

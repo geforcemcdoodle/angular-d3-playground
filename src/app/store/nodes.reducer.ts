@@ -7,6 +7,7 @@ import { Node } from '../d3/models/node';
 
 export const initialState: ReadonlyArray<Node> = [];
 export const initialSunburstState: ShowAtPoint = { show: false, x: 0, y: 0 };
+export const initialSelectedNodeState: Node = new Node(0);
 
 export const nodesReducer = createReducer(
   initialState,  
@@ -19,5 +20,12 @@ export const nodesMenuReducer = createReducer(
   initialSunburstState,
   on(ShowSunburst, (state, {showAtPoint}) => {
     return showAtPoint;
+  }),
+);
+
+export const nodesSelectionReducer = createReducer(
+  initialSelectedNodeState,  
+  on(NodesActions.selectNode, (state, { node }) => {    
+    return node;
   }),
 );
