@@ -109,10 +109,8 @@ export class ForceDirectedGraph {
     return node_new;
   }
 
-  addLink(source: Node, target: Node) {
-    // this.links.push(new Link(source, target));
-    // this.links.push(new Link(this.nodes[0], this.nodes[3]));
-    this.links.push(new Link(this.nodes[0], target));
+  addLink(source_index: number, target: Node) {
+    this.links.push(new Link(this.nodes[source_index], target));
     this.simulation.force('links',
       d3.forceLink(this.links)
         .id((d: any) => d['id'])

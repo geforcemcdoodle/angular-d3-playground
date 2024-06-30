@@ -33,7 +33,7 @@ export class NodeVisualComponent {
 
     let time = 0;
     gestureIndicator.interval = setInterval(() => {
-      gestureIndicator.size += 1;
+      gestureIndicator.size += 2;
       if (gestureIndicator.size === 100) {
         this.store.dispatch(
           ShowSunburst({
