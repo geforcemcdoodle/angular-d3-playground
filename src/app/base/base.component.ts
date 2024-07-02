@@ -33,14 +33,8 @@ export class BaseComponent {
   constructor(
     private store: Store<{show_sunburst: ShowAtPoint}>,
     ) {
-    this.nodes = [
-      new Node(1), new Node(2,150), new Node(3,200), new Node(4,450),
-      new Node(5,100,150), new Node(6,100,200)
-    ];
-    this.links = [
-      new Link(this.nodes[0].sim, this.nodes[1].sim),
-      new Link(this.nodes[2].sim, this.nodes[3].sim)
-    ];
+    this.nodes = [ new Node(1) ];
+    this.links = [];
     this.indicators = new Indicator();
   }
 

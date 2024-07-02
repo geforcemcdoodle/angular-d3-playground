@@ -1,5 +1,3 @@
-import { Node } from './';
-
 export class Link implements d3.SimulationLinkDatum<d3.SimulationNodeDatum> {
   // optional - defining optional implementation properties - required for relevant typing assistance
   index?: number;

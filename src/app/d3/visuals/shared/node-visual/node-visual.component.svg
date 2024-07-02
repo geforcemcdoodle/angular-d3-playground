@@ -5,6 +5,6 @@
   [attr.r]="radius"  
   (press)="onPress($event)"
   (pressUp)="onPressUp($event)"
+  fill="#0077B6"
   (tap)="onClick()"
-  stroke="black"
 />

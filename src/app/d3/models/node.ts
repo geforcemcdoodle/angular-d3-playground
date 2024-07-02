@@ -2,7 +2,6 @@ import { SimulationNodeDatum } from 'd3';
 
 
 export class Node {
-    // Optional - defining optional implementation properties - required for relevant typing assistance
     sim: SimulationNodeDatum = { 
         index : 0,
         x: 0,
@@ -13,12 +12,14 @@ export class Node {
         fy: null
     }; 
 
-    group?: number | string;
-    name?: string;
-    r?: number;
-    radius?: number;
-    color?: string;
-    id?: number;
+    svg = {
+        group: 0,
+        name: "",
+        color: "",
+        id: 0
+    };
+
+    radius?: number = 12;
 
     parent?: Node;
     children?: Node[] = [];
@@ -26,9 +27,8 @@ export class Node {
 
     
     constructor(id: number, x=100, y=100, r=12) {
-        this.id = id;
+        this.svg.id = id;
         this.sim.x = x;
         this.sim.y = y;
-        this.r = r;
     }
 }
