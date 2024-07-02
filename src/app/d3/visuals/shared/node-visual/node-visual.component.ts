@@ -58,7 +58,10 @@ export class NodeVisualComponent {
 
   onClick() {
     // without this shallow copy ( doing { node: this.node}), we run into a 'fx is read-only' error loop
+    let sim = {...this.node.sim};
     let node = {...this.node};
+    node.sim = sim;
+
     this.store.dispatch(
       NodesActions.selectNode({ node: node })
     );
