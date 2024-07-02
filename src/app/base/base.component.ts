@@ -30,8 +30,6 @@ export class BaseComponent {
   currentStyles: Record<string, string> = {};
   indicators!: any;
 
-  @ViewChild('test') test!: ElementRef;
-
   constructor(
     private store: Store<{show_sunburst: ShowAtPoint}>,
     ) {

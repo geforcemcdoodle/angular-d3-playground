@@ -85,8 +85,8 @@ export class ForceDirectedGraph {
   }
 
   addNode() {
-    let id = this.nodes.length + 1;
-    let node_new = new Node(id);
+    let id_new = this.nodes.length + 1;
+    let node_new = new Node(id_new);
     this.nodes.push(node_new.sim);
     this.simulation.nodes(this.nodes);
     this.simulation.alpha(1.0).restart();

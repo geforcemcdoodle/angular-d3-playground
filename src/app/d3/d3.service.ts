@@ -16,10 +16,10 @@ export class D3Service {
     * while maintaining the d3 simulations physics
     */
     graph!: ForceDirectedGraph;    
-    node_focused$!: Node;
+    node_focused$!: SimulationNodeDatum;
 
     constructor(
-        private store: Store<{ node_focused: Node }>,
+        private store: Store<{ node_focused: SimulationNodeDatum }>,
         ) {
         this.store.select(selectFocusedNode).subscribe({
             next: (node) => this.node_focused$ = node
@@ -88,7 +88,7 @@ export class D3Service {
         // if we would put node_source as a parameter into addLink() instead of the index,
         // a link to the focused node is created with old positioning. This is reflected in a link, fixed to the target
         // but not to the source, thus in a state of limbo
-        let node_source_index = this.node_focused$.sim.index;
+        let node_source_index = this.node_focused$.index;
         this.graph.addLink(node_source_index as any, node_target.sim);
     }
 }

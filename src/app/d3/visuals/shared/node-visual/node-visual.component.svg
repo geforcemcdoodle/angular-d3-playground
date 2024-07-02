@@ -1,8 +1,8 @@
 <svg:circle
   class="circle gesture__zone"
-  [attr.cx]="node.sim.x"
-  [attr.cy]="node.sim.y"
-  [attr.r]="node.r"  
+  [attr.cx]="node.x"
+  [attr.cy]="node.y"
+  [attr.r]="radius"  
   (press)="onPress($event)"
   (pressUp)="onPressUp($event)"
   (tap)="onClick()"

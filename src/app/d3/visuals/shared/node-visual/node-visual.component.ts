@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Node } from '../../../models';
 import { ShowSunburst, NodesActions } from '../../../../store/nodes.actions';
 import { Indicator, IndicatorAnimations } from '../../../../gestures/press.indicator';
+import { SimulationNodeDatum } from 'd3';
 
 
 @Component({
@@ -13,8 +14,9 @@ import { Indicator, IndicatorAnimations } from '../../../../gestures/press.indic
 })
 export class NodeVisualComponent {
   indicators!: any;
+  radius: number = 12;
 
-  @Input('node') node!: Node;
+  @Input('node') node!: SimulationNodeDatum;
 
   constructor(
     private store: Store,
@@ -39,8 +41,8 @@ export class NodeVisualComponent {
           ShowSunburst({
             showAtPoint: {
               show: true,
-              x: _this.node.sim.x as any,
-              y: _this.node.sim.y as any
+              x: _this.node.x as any,
+              y: _this.node.y as any
             }
           }
         ));
@@ -58,9 +60,8 @@ export class NodeVisualComponent {
 
   onClick() {
     // without this shallow copy ( doing { node: this.node}), we run into a 'fx is read-only' error loop
-    let sim = {...this.node.sim};
-    let node = {...this.node};
-    node.sim = sim;
+    // let sim = {...this.node.sim};
+    let node = {...this.node};    
 
     this.store.dispatch(
       NodesActions.selectNode({ node: node })

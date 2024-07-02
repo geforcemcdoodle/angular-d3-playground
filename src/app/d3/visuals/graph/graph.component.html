@@ -4,8 +4,8 @@
 	[attr.height]="_options.height"
 >
 	<svg:g [zoomableOf]="svg">
-		@for (node of nodes; track node.sim.index) {
-			<svg:g nodeVisual [draggableNode]="node.sim" [draggableInGraph]="graph" [node]="node" />
+		@for (node_sim of graph.nodes; track node_sim.index) {
+			<svg:g nodeVisual [draggableNode]="node_sim" [draggableInGraph]="graph" [node]="node_sim" />
 		}
 		@for (link of links; track link.index) {
 			<svg:g linkVisual [link]="link" />
