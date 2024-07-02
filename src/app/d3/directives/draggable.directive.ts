@@ -8,7 +8,7 @@ import { D3Service } from '../d3.service';
     standalone: true
 })
 export class DraggableDirective {
-    @Input('draggableNode') draggableNode!: Node;
+    @Input('draggableNode') draggableNode!: d3.SimulationNodeDatum;
     @Input('draggableInGraph') draggableInGraph!: ForceDirectedGraph;
 
     constructor(private d3Service: D3Service, private _element: ElementRef) { }

@@ -10,15 +10,15 @@ const FORCES = {
 }
 
 export class ForceDirectedGraph {
-  public ticker: EventEmitter<d3.Simulation<Node, Link>> = new EventEmitter();
-  public simulation!: d3.Simulation<Node, Link>;
+  public ticker: EventEmitter<d3.Simulation<d3.SimulationNodeDatum, Link>> = new EventEmitter();
+  public simulation!: d3.Simulation<d3.SimulationNodeDatum, Link>;
 
-  public nodes: Node[] = [];
+  public nodes: d3.SimulationNodeDatum[] = [];
   public links: Link[] = [];
 
 
   constructor(
-    nodes: Node[],
+    nodes: d3.SimulationNodeDatum[],
     links: Link[],
     options: { width: number, height: number },
   ) {
@@ -26,21 +26,6 @@ export class ForceDirectedGraph {
     this.links = links;
 
     this.initSimulation(options);
-  }
-
-  connectNodes(source: Node, target: Node) {
-    let link;
-
-    if (!source || !target) {
-      throw new Error('One of the nodes does not exist');
-    }
-
-    link = new Link(source, target);
-    this.simulation.stop();
-    this.links.push(link);
-    this.simulation.alphaTarget(0.3).restart();
-
-    this.initLinks();
   }
 
   initNodes() {
@@ -102,14 +87,14 @@ export class ForceDirectedGraph {
   addNode() {
     let id = this.nodes.length + 1;
     let node_new = new Node(id);
-    this.nodes.push(node_new);
+    this.nodes.push(node_new.sim);
     this.simulation.nodes(this.nodes);
     this.simulation.alpha(1.0).restart();
 
     return node_new;
   }
 
-  addLink(source_index: number, target: Node) {
+  addLink(source_index: number, target: d3.SimulationNodeDatum) {
     this.links.push(new Link(this.nodes[source_index], target));
     this.simulation.force('links',
       d3.forceLink(this.links)

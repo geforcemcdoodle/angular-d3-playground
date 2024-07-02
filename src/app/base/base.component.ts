@@ -40,8 +40,8 @@ export class BaseComponent {
       new Node(5,100,150), new Node(6,100,200)
     ];
     this.links = [
-      new Link(this.nodes[0], this.nodes[1]),
-      new Link(this.nodes[2], this.nodes[3])
+      new Link(this.nodes[0].sim, this.nodes[1].sim),
+      new Link(this.nodes[2].sim, this.nodes[3].sim)
     ];
     this.indicators = new Indicator();
   }

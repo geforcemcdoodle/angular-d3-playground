@@ -39,8 +39,8 @@ export class NodeVisualComponent {
           ShowSunburst({
             showAtPoint: {
               show: true,
-              x: _this.node.x as any,
-              y: _this.node.y as any
+              x: _this.node.sim.x as any,
+              y: _this.node.sim.y as any
             }
           }
         ));
