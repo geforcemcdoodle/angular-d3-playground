@@ -6,6 +6,7 @@ import * as d3 from 'd3';
 import { SimulationNodeDatum } from 'd3';
 import { Store } from '@ngrx/store';
 import { selectFocusedNode } from '../store/nodes.selectors';
+import { NodesActions } from '../store/nodes.actions';
 
 
 @Injectable({
@@ -35,12 +36,18 @@ export class D3Service {
     }
 
     addConnectedNode() {
-        let node_target = this.graph.addNode();        
+        let node_new = this.graph.addNode();        
 
         // if we would put node_source as a parameter into addLink() instead of the index,
         // a link to the focused node is created with old positioning. This is reflected in a link, fixed to the target
         // but not to the source, thus in a state of limbo
         let node_source_index = this.node_focused$.index;
-        this.graph.addLink(node_source_index as any, node_target.sim);
+        this.graph.addLink(node_source_index as any, node_new.sim);
+
+        this.store.dispatch(
+          NodesActions.addNode({
+            node: structuredClone(node_new)
+          }
+        ));
     }
 }

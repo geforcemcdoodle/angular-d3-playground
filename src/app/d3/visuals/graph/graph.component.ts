@@ -4,6 +4,8 @@ import { NodeVisualComponent } from '../shared/node-visual/node-visual.component
 import { LinkVisualComponent } from '../shared/link-visual/link-visual.component';
 import { D3Service } from '../../d3.service';
 import { ZoomableDirective, DraggableDirective } from '../../directives';
+import { NodesActions } from '../../../store/nodes.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'graph',
@@ -14,8 +16,8 @@ import { ZoomableDirective, DraggableDirective } from '../../directives';
   styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnInit, AfterViewInit {
-  @Input('nodes') nodes!: Node[];
-  @Input('links') links!: Link[];
+  nodes!: Node[];
+  links: Link[] = [];
 
   graph!: ForceDirectedGraph;
   _options: { width: number, height: number } = { width: 400, height: 300 };
@@ -26,7 +28,13 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
 
-  constructor(private ref: ChangeDetectorRef, private d3Service: D3Service) {}
+  constructor(
+    private ref: ChangeDetectorRef,
+    private d3Service: D3Service,
+    private store: Store<{ nodes: Node[] }>
+  ) {
+    this.nodeInit();
+  }
 
   ngOnInit() {
     /** Receiving an initialized simulated graph from our custom d3 service */
@@ -45,6 +53,15 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.graph.initSimulation(this.options);
+  }
+
+  nodeInit() {
+    this.nodes = [ new Node(1) ];
+    this.store.dispatch(
+      NodesActions.addNode({
+        node: structuredClone(this.nodes[0])
+      }
+    ));
   }
 
   get options() {

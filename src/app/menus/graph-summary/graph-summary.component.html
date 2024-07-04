@@ -1,0 +1,4 @@
+Total nodes: {{ nodes$.length }}
+@for (node of nodes$; track node.sim.index) {
+	<div>Index: {{ node.sim.index }}</div>
+}

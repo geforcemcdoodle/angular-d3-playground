@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CommonModule, NgIf, NgStyle } from '@angular/common';
 import { ShowAtPoint } from '../interfaces/showAtPoint';
+import { GraphSummaryComponent } from '../menus/graph-summary/graph-summary.component';
 import { Indicator, IndicatorAnimations } from '../gestures/pan.indicator';
 import 'hammerjs';
 
@@ -19,22 +20,19 @@ import 'hammerjs';
     NgIf,
     NgStyle,
     CommonModule,
+    GraphSummaryComponent
     ],
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.css', '../gestures/gestures.css']
 })
 export class BaseComponent {
   showSunburstAtPoint$!: Observable<ShowAtPoint>;
-  nodes: Node[];
-  links: Link[];
   currentStyles: Record<string, string> = {};
   indicators!: any;
 
   constructor(
     private store: Store<{show_sunburst: ShowAtPoint}>,
     ) {
-    this.nodes = [ new Node(1) ];
-    this.links = [];
     this.indicators = new Indicator();
   }
 
