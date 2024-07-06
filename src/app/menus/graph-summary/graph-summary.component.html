@@ -1,4 +1,9 @@
 Total nodes: {{ nodes$.length }}
 @for (node of nodes$; track node.sim.index) {
-	<div>Index: {{ node.sim.index }}</div>
+	<div>
+		Index: {{ node.sim.index }}
+		@if (node.parent != null) {
+			<span>Parent index: {{ node.parent.sim.index }}</span>
+		}
+	</div>
 }

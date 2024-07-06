@@ -84,18 +84,19 @@ export class ForceDirectedGraph {
     this.simulation.restart();
   }
 
-  addNode() {
-    let id_new = this.nodes.length + 1;
-    let node_new = new Node(id_new);
-    this.nodes.push(node_new.sim);
+  addNode(node_new: d3.SimulationNodeDatum) {
+    // index is created
+    this.nodes.push(node_new);
+
     this.simulation.nodes(this.nodes);
     this.simulation.alpha(1.0).restart();
 
-    return node_new;
+    return node_new.index;
   }
 
   addLink(source_index: number, target: d3.SimulationNodeDatum) {
-    this.links.push(new Link(this.nodes[source_index], target));
+    let link_new = new Link(this.nodes[source_index], target);
+    this.links.push(link_new);
     this.simulation.force('links',
       d3.forceLink(this.links)
         .id((d: any) => d['id'])

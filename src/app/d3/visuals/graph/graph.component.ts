@@ -17,7 +17,7 @@ import { Store } from '@ngrx/store';
 })
 export class GraphComponent implements OnInit, AfterViewInit {
   nodes!: Node[];
-  links: Link[] = [];
+  links!: Link[];
 
   graph!: ForceDirectedGraph;
   _options: { width: number, height: number } = { width: 400, height: 300 };
@@ -30,17 +30,13 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   constructor(
     private ref: ChangeDetectorRef,
-    private d3Service: D3Service,
-    private store: Store<{ nodes: Node[] }>
+    private d3Service: D3Service,    
   ) {
-    this.nodeInit();
   }
 
   ngOnInit() {
-    /** Receiving an initialized simulated graph from our custom d3 service */
+    this.graph = this.d3Service.getForceDirectedGraph(this.options);
 
-    let nodes_sim = this.nodes.map(({ sim }) => sim);
-    this.graph = this.d3Service.getForceDirectedGraph(nodes_sim, this.links, this.options);
     /** Binding change detection check on each tick
      * This along with an onPush change detection strategy should enforce checking only when relevant!
      * This improves scripting computation duration in a couple of tests I've made, consistently.
@@ -48,20 +44,14 @@ export class GraphComponent implements OnInit, AfterViewInit {
      */
     this.graph.ticker.subscribe((d: any) => {
       this.ref.markForCheck();
+      // how bad is this for performance?
+      this.nodes = this.d3Service.getNodes();
+      this.links = this.d3Service.getLinks();
     });
   }
 
   ngAfterViewInit() {
     this.graph.initSimulation(this.options);
-  }
-
-  nodeInit() {
-    this.nodes = [ new Node(1) ];
-    this.store.dispatch(
-      NodesActions.addNode({
-        node: structuredClone(this.nodes[0])
-      }
-    ));
   }
 
   get options() {

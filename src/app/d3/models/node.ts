@@ -21,7 +21,7 @@ export class Node {
 
     radius?: number = 12;
 
-    parent?: Node;
+    parent?: Node = undefined;
     children?: Node[] = [];
     siblings?: Node[] = [];
 
