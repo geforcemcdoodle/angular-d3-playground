@@ -9,6 +9,9 @@ import { ShowAtPoint } from '../interfaces/showAtPoint';
 import { GraphSummaryComponent } from '../menus/graph-summary/graph-summary.component';
 import { Indicator, IndicatorAnimations } from '../gestures/pan.indicator';
 import 'hammerjs';
+// declare var MosesPatterns: any;
+// import * as MosesPatterns from 'mosesjs/js/model/moses-patterns';
+import 'mosesjs';
 
 
 @Component({
@@ -34,6 +37,9 @@ export class BaseComponent {
     private store: Store<{show_sunburst: ShowAtPoint}>,
     ) {
     this.indicators = new Indicator();
+    // var mosesPatterns = moses.models.MosesPatterns.create();
+
+
   }
 
   ngOnInit() {
